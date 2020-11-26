@@ -935,6 +935,7 @@ def main():
     except:
         print "\nUsing the default config file: config/experiment_parameters.cfg\n"
         config_filepath = "config/experiment_parameters.cfg"
+        device_list = None
 
     run_experiment(config_filepath, device_list)
 
