@@ -911,7 +911,7 @@ def run_experiment(config_filepath, device_list=None):
     We then print the SimLex-999 score of the final vectors, and save them to a .txt file in the 
     results directory.
     """
-    current_experiment = ExperimentRun(config_filepath, device_list=None)
+    current_experiment = ExperimentRun(config_filepath, device_list=device_list)
     
     current_experiment.attract_repel() 
     
