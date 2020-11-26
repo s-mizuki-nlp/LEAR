@@ -31,7 +31,7 @@ class ExperimentRun:
     This class stores all of the data and hyperparameters required for an Attract-Repel run. 
     """
 
-    def __init__(self, config_filepath):
+    def __init__(self, config_filepath, device_list=None):
         """
         To initialise the class, we need to supply the config file, which contains the location of
         the pretrained (distributional) word vectors, the location of (potentially more than one)
@@ -134,7 +134,12 @@ class ExperimentRun:
 
         init = tf.global_variables_initializer()
 
-        self.sess = tf.Session()
+        if device_list is not None:
+            config = tf.ConfigProto(gpu_options=tf.GPUOptions(visible_device_list=device_list, allow_growth=True))
+        else:
+            config = None
+
+        self.sess = tf.Session(config=config)
         self.sess.run(init)
 
 
@@ -926,11 +931,12 @@ def main():
     """
     try:
         config_filepath = sys.argv[1]
+        device_list = sys.argv[2] if len(sys.argv) >= 3 else None
     except:
         print "\nUsing the default config file: config/experiment_parameters.cfg\n"
         config_filepath = "config/experiment_parameters.cfg"
 
-    run_experiment(config_filepath)
+    run_experiment(config_filepath, device_list)
 
 
 if __name__=='__main__':
