@@ -904,14 +904,14 @@ def simlex_scores(word_vectors, distance_metric, order, print_simlex=True):
     return simlex_score_en, ws_score_en
 
 
-def run_experiment(config_filepath):
+def run_experiment(config_filepath, device_list=None):
     """
     This method runs the attract-repel experiment, printing the SimLex-999 score of the initial
     vectors, then counter-fitting them using the supplied linguistic constraints. 
     We then print the SimLex-999 score of the final vectors, and save them to a .txt file in the 
     results directory.
     """
-    current_experiment = ExperimentRun(config_filepath)
+    current_experiment = ExperimentRun(config_filepath, device_list=None)
     
     current_experiment.attract_repel() 
     
