@@ -790,21 +790,21 @@ def hyperlex_analysis(word_vectors, language="english", source="hyperlex", dista
         extracted_scores[(word_i, word_j)] = current_distance
         extracted_list.append(((word_i, word_j), current_distance))
 
-    extracted_list.sort(key=lambda x: x[1])
-
     # ToDo: DEBUG
     # save raw evaluation results into temporary file.
     file_name = "results/hyperlex_raw.txt"
-    header = "hyponym\thypernym\tground_truth_score\tpredicted_score"
+    header = u"hyponym\thypernym\tground_truth_score\tpredicted_score\n"
     ofs = io.open(file_name, mode="w")
     ofs.write(header)
     for ground_truth_pair, predicted_pair in zip(pair_list, extracted_list):
         (word_i, word_j), ground_truth_score = ground_truth_pair
         (word_i_, word_j_), predicted_score = predicted_pair
         assert (word_i, word_j) == (word_i_, word_j_), "mismatch detected."
-        record = "\t".join([word_i,word_j,ground_truth_score, predicted_score])+"\n"
-        ofs.write(record)
+        record = "\t".join([word_i,word_j,str(ground_truth_score), str(predicted_score)])+"\n"
+        ofs.write(unicode(record))
     ofs.close()
+
+    extracted_list.sort(key=lambda x: x[1])
 
     spearman_original_list = []
     spearman_target_list = []
