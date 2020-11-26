@@ -628,6 +628,7 @@ def load_word_vectors(file_destination):
         try:
             line = line.split(" ", 1)   
             key = unicode(line[0].lower())
+            key = u"en_" + key
             vect = numpy.fromstring(line[1], dtype="float32", sep=" ")
             word_dictionary[key] = vect / norm(vect)
 
