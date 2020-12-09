@@ -792,9 +792,8 @@ def hyperlex_analysis(word_vectors, language="english", source="hyperlex", dista
 
     extracted_list.sort(key=lambda x: x[1])
 
-    # ToDo: DEBUG
     # save raw evaluation results into temporary file.
-    file_name = "results/hyperlex_raw.txt"
+    file_name = "results/" + source + "_raw.txt"
     header = "hyponym\thypernym\tground_truth_score\tpredicted_score"
     ofs = io.open(file_name, mode="w")
     ofs.write(header)
